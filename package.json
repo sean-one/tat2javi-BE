@@ -1,0 +1,23 @@
+{
+  "name": "tat2javi-BE",
+  "version": "1.0.0",
+  "description": "tat2javi backend",
+  "main": "index.js",
+  "repository": "https://github.com/sean-one/tat2javi-BE.git",
+  "author": "sean-one <basement365@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "server": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "knex": "^0.16.5",
+    "pg": "^7.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.11"
+  }
+}
