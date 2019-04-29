@@ -47,4 +47,24 @@ router.get('/email/:email', (req, res) => {
         });
 });
 
+// POST a new client
+router.post('/', async (req, res) => {
+    try {
+        const clientData = req.body;
+        const checkForExisting = await db.findByEmail(clientData.email);
+        if (!checkForExisting) {
+            try {
+                const clientId = await db.add(clientData);
+                res.status(201).json(clientId);
+            } catch (error) {
+                res.status(500).json({ error: 'unable to add user to database' })
+            }
+        } else {
+            res.status(200).json(checkForExisting);
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'error creating the client', error: error })
+    }
+});
+
 module.exports = router;
