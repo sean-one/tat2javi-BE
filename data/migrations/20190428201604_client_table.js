@@ -1,33 +1,33 @@
 
 exports.up = function(knex) {
     return knex.schema.createTable('clients', clients => {
-        clients.increments('id');
+        clients.increments();
 
         clients
-            .string('firstname', 20)
+            .string('firstname')
             .notNullable();
         
         clients
-            .string('lastname', 30)
+            .string('lastname')
             .notNullable();
         
         clients
-            .string('email', 128)
+            .string('email')
             .notNullable()
             .unique();
         
         // may be parsed as string type in javascript
         clients
-            .bigInteger('phone', 10);
+            .bigInteger('phone');
         
         clients
-            .string('address', 256)
+            .string('address')
         
         clients
-            .string('city', 256)
+            .string('city')
         
         clients
-            .string('state', 2)
+            .string('state')
     })
   
 };
