@@ -16,8 +16,9 @@ exports.up = function(knex) {
             .notNullable()
             .unique();
         
+        // may be parsed as string type in javascript
         clients
-            .integer('phone', 10);
+            .bigInteger('phone', 10);
         
         clients
             .string('address', 256)
