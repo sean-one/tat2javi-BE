@@ -22,7 +22,7 @@ router.get('/:id', (req, res) => {
             if (client) {
                 res.status(200).json(client);
             } else {
-                res.status(404).json({ message: 'user not found' });
+                res.status(404).json({ message: 'client not found' });
             }
         })
         .catch(err => {
@@ -39,7 +39,7 @@ router.get('/email/:email', (req, res) => {
             if (client) {
                 res.status(200).json(client);
             } else {
-                res.status(404).json({ message: 'unable to find user with that email'});
+                res.status(404).json({ message: 'unable to find client with that email'});
             }
         })
         .catch(err => {
@@ -57,7 +57,7 @@ router.post('/', async (req, res) => {
                 const clientId = await db.add(clientData);
                 res.status(201).json(clientId);
             } catch (error) {
-                res.status(500).json({ error: 'unable to add user to database' })
+                res.status(500).json({ error: 'unable to add client to database' })
             }
         } else {
             res.status(200).json(checkForExisting);
@@ -65,6 +65,38 @@ router.post('/', async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'error creating the client', error: error })
     }
+});
+
+// PUT / UPDATE client by id
+router.put('/:id', (req, res) => {
+    const { id } = req.params;
+    const changes = req.body;
+    db.update(id, changes)
+        .then(count => {
+            if (count) {
+                res.status(200).json({ message: `${count} client updated` });
+            } else {
+                res.status(404).json({ message: 'client not found' });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'server error', err });
+        })
+});
+
+// DELETE client by id
+router.delete('/:id', (req, res) => {
+    db.remove(req.params.id)
+        .then(count => {
+            if (count < 1) {
+                res.status(404).json({ message: 'please try a valid client' });
+            } else {
+                res.status(200).json({ message: 'client has been deleted' });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'server errror', err });
+        });
 });
 
 module.exports = router;
