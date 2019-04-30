@@ -19,7 +19,11 @@ exports.up = function(knex) {
             .float('deposit_value');
         
         appointments
-            .bigInteger('date_options')
+            .date('date_options')
+            .notNullable();
+        
+        appointments
+            .string('client_email')
             .notNullable();
     })
   
