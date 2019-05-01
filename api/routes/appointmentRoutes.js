@@ -39,7 +39,7 @@ router.get('/client/:id', (req, res) => {
             if (appointment) {
                 res.status(200).json(appointment);
             } else {
-                res.status(404).json({ message: 'this client has not appointments' })
+                res.status(404).json({ message: 'this client has no appointments' })
             }
         })
         .catch(err => {
@@ -63,7 +63,7 @@ router.post('/', async (req, res) => {
             res.status(200).json(checkForExisting);
         }
     } catch (error) {
-        res.status(500).json({ message: 'error crerating your appointment', error: error })
+        res.status(500).json({ message: 'error creating your appointment', error: error })
     }
 });
 
