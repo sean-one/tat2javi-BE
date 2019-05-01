@@ -67,4 +67,36 @@ router.post('/', async (req, res) => {
     }
 });
 
+// PUT endpoint to update an existing appointment
+router.put('/:id', (req, res) => {
+    const { id } = req.params;
+    const changes = req.body;
+    db.update(id, changes)
+        .then(count => {
+            if (count) {
+                res.status(200).json({ messages: `${count} appointment updated` });
+            } else {
+                res.status(404).json({ message: 'appointment not found' });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'server error', err });
+        })
+});
+
+// DELETE appointment by appointment id
+router.delete('/:id', (req, res) => {
+    db.remove(req.params.id)
+        .then(count => {
+            if (count < 1) {
+                res.status(404).json({ message: 'no appointments with that id' });
+            } else {
+                res.status(200).json({ message: 'appointment has been deleted' });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'server error', err });
+        });
+});
+
 module.exports = router;
