@@ -21,10 +21,6 @@ exports.up = function(knex) {
         appointments
             .date('date_options')
             .notNullable();
-        
-        appointments
-            .string('client_email')
-            .notNullable();
     })
   
 };

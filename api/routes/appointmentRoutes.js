@@ -47,4 +47,24 @@ router.get('/client/:id', (req, res) => {
         });
 });
 
+// POST a new appointment
+router.post('/', async (req, res) => {
+    try {
+        const apptData = req.body;
+        const checkForExisting = await db.findByClientId(apptData.client_email);
+        if (!checkForExisting) {
+            try {
+                const appointmentId = await db.add(apptData);
+                res.status(201).json(appointmentId);
+            } catch (error) {
+                res.status(500).json({ error: 'unable to add your appointment' })
+            }
+        } else {
+            res.status(200).json(checkForExisting);
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'error crerating your appointment', error: error })
+    }
+});
+
 module.exports = router;
