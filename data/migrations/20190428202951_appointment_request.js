@@ -12,6 +12,10 @@ exports.up = function(knex) {
             .notNullable();
         
         appointments
+            .string('description')
+            .notNullable();
+        
+        appointments
             .boolean('deposit')
             .notNullable();
         
@@ -21,6 +25,10 @@ exports.up = function(knex) {
         appointments
             .date('date_options')
             .notNullable();
+        
+        appointments
+            .string('reference_material');
+
     })
   
 };
