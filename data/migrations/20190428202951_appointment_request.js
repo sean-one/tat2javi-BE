@@ -12,7 +12,7 @@ exports.up = function(knex) {
             .notNullable();
         
         appointments
-            .string('description')
+            .string('description', 800)
             .notNullable();
         
         appointments
