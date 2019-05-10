@@ -1,7 +1,7 @@
 
 exports.up = function(knex) {
     return knex.schema.createTable('events', events => {
-        events.increment('id');
+        events.increments('id');
 
         events
             .string('event_name')
