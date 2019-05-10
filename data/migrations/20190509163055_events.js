@@ -24,10 +24,8 @@ exports.up = function(knex) {
 
         events
             .string('event_image')
-            .notNullable();
-        
-    })
-  
+            .notNullable(); 
+    });
 };
 
 exports.down = function(knex, Promise) {

@@ -1,4 +1,4 @@
-const db = request('./dbConfig');
+const db = require('./dbConfig');
 
 module.exports = {
     find,
@@ -13,7 +13,7 @@ function find() {
 }
 
 function findById(id) {
-    return db('events').where({ id }).first()
+    return db('events').where({ id }).first();
 }
 
 function add(event) {
