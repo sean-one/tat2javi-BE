@@ -3,6 +3,7 @@ const db = require('./dbConfig');
 module.exports = {
     find,
     findById,
+    findByEvent,
     add,
     update,
     remove
@@ -14,6 +15,10 @@ function find() {
 
 function findById(id) {
     return db('events').where({ id }).first();
+}
+
+function findByEvent(event_name) {
+    return db('events').where({ event_name: event_name }).first();
 }
 
 function add(event) {

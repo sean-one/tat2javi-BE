@@ -5,7 +5,8 @@ exports.up = function(knex) {
 
         events
             .string('event_name')
-            .notNullable();
+            .notNullable()
+            .unique();
         
         events
             .date('event_startDate')
