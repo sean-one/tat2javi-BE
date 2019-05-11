@@ -50,4 +50,36 @@ router.post('/', async (req, res) => {
     }
 });
 
+// PUT endpoint to update existing event
+router.put('/:id', (req, res) => {
+    const { id } = req.params;
+    const changes = req.body;
+    db.update(id, changes)
+        .then(count => {
+            if (count)  {
+                res.status(200).json({ message: `${count} event updated` });
+            } else {
+                res.status(404).json({ message: 'event not found' });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'server error', err });
+        })
+});
+
+// DELETE event by id
+router.delete('/:id', (req, res) => {
+    db.remove(req.params.id)
+        .then(count => {
+            if (count < 1) {
+                res.status(404).json({ message: 'no event with that id' });
+            } else {
+                res.status(200).json({ message: 'event has been deleted' });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'server error', err });
+        });
+});
+
 module.exports = router;
